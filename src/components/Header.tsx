@@ -1,6 +1,10 @@
+import { StyledHeader } from '../style/StyledHeader.style';
+
 function Header() {
   return (
-    <h1>Gerenciador de senhas</h1>
+    <StyledHeader>
+      <h1>Gerenciador de senhas</h1>
+    </StyledHeader>
   );
 }
 

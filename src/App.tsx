@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Form from './components/Form';
 import Button from './components/Button';
 import { FormInfoType, TargetType } from './types/types';
+import { GlobalStyle } from './style/GlobalStyle';
+import { StyledMain } from './style/StyledMain.style';
 
 const initialFormValues = {
   nomeDoServico: '',
@@ -34,13 +36,16 @@ function App() {
   }
   return (
     <>
+      <GlobalStyle />
       <Header />
-      {renderForm && (<Form
-        handleHideForm={ () => handleHideForm() }
-        formInfo={ formInfo }
-        handleChange={ (event: TargetType) => handleChange(event) }
-      />)}
-      {!renderForm && (<Button handleRenderForm={ () => handleRenderForm() } />)}
+      <StyledMain>
+        {renderForm && (<Form
+          handleHideForm={ () => handleHideForm() }
+          formInfo={ formInfo }
+          handleChange={ (event: TargetType) => handleChange(event) }
+        />)}
+        {!renderForm && (<Button handleRenderForm={ () => handleRenderForm() } />)}
+      </StyledMain>
     </>
   );
 }

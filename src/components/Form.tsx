@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { FormInfoType, TargetType } from '../types/types';
+import { StyledButton, StyledRedButton } from '../style/StyledButton.style';
+import { StyledForm } from '../style/StyledForm.style';
 
 const regex = /\W|_/;
 
@@ -22,10 +24,11 @@ function Form(props: FormProps) {
     setValidInputs(nomeDoServicoValido && loginValido && senhaValida);
   }
   return (
-    <form action="">
-      <div>
+    <StyledForm action="">
+      <section>
         <label htmlFor="nome-do-servico">
           Nome do Serviço
+          <br />
           <input
             id="nome-do-servico"
             name="nomeDoServico"
@@ -38,10 +41,11 @@ function Form(props: FormProps) {
             required
           />
         </label>
-      </div>
-      <div>
+      </section>
+      <section>
         <label htmlFor="login">
           Login
+          <br />
           <input
             id="login"
             name="login"
@@ -54,10 +58,11 @@ function Form(props: FormProps) {
             required
           />
         </label>
-      </div>
-      <div>
+      </section>
+      <section>
         <label htmlFor="senha">
           Senha
+          <br />
           <input
             id="senha"
             name="senha"
@@ -72,10 +77,11 @@ function Form(props: FormProps) {
             required
           />
         </label>
-      </div>
-      <div>
+      </section>
+      <section>
         <label htmlFor="url">
           URL
+          <br />
           <input
             id="url"
             name="url"
@@ -87,12 +93,12 @@ function Form(props: FormProps) {
             } }
           />
         </label>
-      </div>
+      </section>
       <div>
-        <button disabled={ !validInputs }>Cadastrar</button>
-        <button onClick={ handleHideForm }>Cancelar</button>
+        <StyledButton disabled={ !validInputs }>Cadastrar</StyledButton>
+        <StyledRedButton onClick={ handleHideForm }>Cancelar</StyledRedButton>
       </div>
-    </form>
+    </StyledForm>
   );
 }
 
