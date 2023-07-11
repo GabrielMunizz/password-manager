@@ -1,4 +1,8 @@
-function Form() {
+type FormProps = {
+  handleHideForm: () => void;
+};
+function Form(props: FormProps) {
+  const { handleHideForm } = props;
   return (
     <form action="">
       <div>
@@ -27,7 +31,7 @@ function Form() {
       </div>
       <div>
         <button>Cadastrar</button>
-        <button>Cancelar</button>
+        <button onClick={ handleHideForm }>Cancelar</button>
       </div>
     </form>
   );
