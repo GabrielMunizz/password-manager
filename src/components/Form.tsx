@@ -13,6 +13,7 @@ function Form(props: FormProps) {
   const { handleHideForm, formInfo, handleChange } = props;
   const { nomeDoServico, login, senha } = formInfo;
   const [validInputs, setValidInputs] = useState(false);
+
   function checkInputValues() {
     const nomeDoServicoValido = nomeDoServico.trim() !== '';
     const loginValido = login.trim() !== '';
