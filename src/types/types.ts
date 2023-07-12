@@ -5,5 +5,11 @@ export type FormInfoType = {
   url: string,
 };
 
+export type FormProps = {
+  handleHideForm: () => void,
+  handleChange: (event:TargetType) => void,
+  formInfo:FormInfoType,
+};
+
 export type TargetType = React
   .ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;

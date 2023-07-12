@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import { FormInfoType, TargetType } from '../types/types';
+import { FormProps } from '../types/types';
 import { StyledButton, StyledRedButton } from '../style/StyledButton.style';
 import { StyledForm } from '../style/StyledForm.style';
 
+// Regex para checagem e validação das senhas referente ao input de senha no form.
 const regex = /\W|_/;
-
-export type FormProps = {
-  handleHideForm: () => void,
-  handleChange: (event:TargetType) => void,
-  formInfo:FormInfoType,
-};
+const regexLetrasENumeros = /[a-zA-Z][0-9]/;
 
 function Form(props: FormProps) {
+  // Transferência das funções e estados criados no .App para o formulário via props.
   const { handleHideForm, formInfo, handleChange } = props;
   const { nomeDoServico, login, senha } = formInfo;
+  // useState para uso da função checkInputValues. Serve para checar se o que foi escrito no input não é vazio e também é válido.
   const [validInputs, setValidInputs] = useState(false);
-
+  // Checagem dos inputs, de acordo com os requisitos e testes do projeto:
   function checkInputValues() {
     const nomeDoServicoValido = nomeDoServico.trim() !== '';
     const loginValido = login.trim() !== '';
@@ -23,6 +21,11 @@ function Form(props: FormProps) {
 
     setValidInputs(nomeDoServicoValido && loginValido && senhaValida);
   }
+  // className referente ao estado da senha: válida ou inválida
+  const senhaValida = 'valid-password-check';
+  const senhaInvalida = 'invalid-password-check';
+
+  // Form:
   return (
     <StyledForm action="">
       <section>
@@ -76,6 +79,18 @@ function Form(props: FormProps) {
             minLength={ 8 }
             required
           />
+          <p className={ senha.length > 8 ? senhaValida : senhaInvalida }>
+            Possuir 8 ou mais caracteres
+          </p>
+          <p className={ senha.length < 16 ? senhaValida : senhaInvalida }>
+            Possuir até 16 caracteres
+          </p>
+          <p className={ regexLetrasENumeros.test(senha) ? senhaValida : senhaInvalida }>
+            Possuir letras e números
+          </p>
+          <p className={ regex.test(senha) ? senhaValida : senhaInvalida }>
+            Possuir algum caractere especial
+          </p>
         </label>
       </section>
       <section>
