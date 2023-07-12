@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormProps } from '../types/types';
+import { FormProps, FormSubmitEventType } from '../types/types';
 import { StyledButton, StyledRedButton } from '../style/StyledButton.style';
 import { StyledForm } from '../style/StyledForm.style';
 
@@ -7,12 +7,19 @@ import { StyledForm } from '../style/StyledForm.style';
 const regex = /\W|_/;
 const regexLetrasENumeros = /[a-zA-Z][0-9]/;
 
+// Cria o componente Form:
 function Form(props: FormProps) {
   // Transferência das funções e estados criados no .App para o formulário via props.
-  const { handleHideForm, formInfo, handleChange } = props;
+  const { formInfo, handleHideForm, handleChange, handleSubmit } = props;
   const { nomeDoServico, login, senha } = formInfo;
+
   // useState para uso da função checkInputValues. Serve para checar se o que foi escrito no input não é vazio e também é válido.
   const [validInputs, setValidInputs] = useState(false);
+
+  // className referente ao estado da senha: válida ou inválida
+  const classSenhaValida = 'valid-password-check';
+  const classSenhaInvalida = 'invalid-password-check';
+
   // Checagem dos inputs, de acordo com os requisitos e testes do projeto:
   function checkInputValues() {
     const nomeDoServicoValido = nomeDoServico.trim() !== '';
@@ -21,13 +28,16 @@ function Form(props: FormProps) {
 
     setValidInputs(nomeDoServicoValido && loginValido && senhaValida);
   }
-  // className referente ao estado da senha: válida ou inválida
-  const senhaValida = 'valid-password-check';
-  const senhaInvalida = 'invalid-password-check';
 
   // Form:
   return (
-    <StyledForm action="">
+    <StyledForm
+      action=""
+      onSubmit={ (event: FormSubmitEventType) => {
+        handleSubmit(event);
+        handleHideForm();
+      } }
+    >
       <section>
         <label htmlFor="nome-do-servico">
           Nome do Serviço
@@ -79,16 +89,22 @@ function Form(props: FormProps) {
             minLength={ 8 }
             required
           />
-          <p className={ senha.length > 8 ? senhaValida : senhaInvalida }>
+          <p className={ senha.length > 8 ? classSenhaValida : classSenhaInvalida }>
             Possuir 8 ou mais caracteres
           </p>
-          <p className={ senha.length < 16 ? senhaValida : senhaInvalida }>
+          <p
+            className={ (senha.length < 16 && senha.length > 0) ? classSenhaValida
+              : classSenhaInvalida }
+          >
             Possuir até 16 caracteres
           </p>
-          <p className={ regexLetrasENumeros.test(senha) ? senhaValida : senhaInvalida }>
+          <p
+            className={ regexLetrasENumeros.test(senha) ? classSenhaValida
+              : classSenhaInvalida }
+          >
             Possuir letras e números
           </p>
-          <p className={ regex.test(senha) ? senhaValida : senhaInvalida }>
+          <p className={ regex.test(senha) ? classSenhaValida : classSenhaInvalida }>
             Possuir algum caractere especial
           </p>
         </label>
@@ -110,7 +126,7 @@ function Form(props: FormProps) {
         </label>
       </section>
       <div>
-        <StyledButton disabled={ !validInputs }>Cadastrar</StyledButton>
+        <StyledButton disabled={ !validInputs } type="submit">Cadastrar</StyledButton>
         <StyledRedButton onClick={ handleHideForm }>Cancelar</StyledRedButton>
       </div>
     </StyledForm>

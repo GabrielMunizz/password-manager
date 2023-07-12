@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #1a1a1a;
     background-image: linear-gradient(to bottom, #1a1a1a, #000000);
     background-repeat: no-repeat;
-    background-size: 100vw 100vh ;
+    background-size: 100vw 100vh ;    
   }
 }
 `;
