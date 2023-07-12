@@ -13,6 +13,9 @@ export const StyledDisplay = styled.div`
     border-bottom: 1px solid black;
   }
   & section {
+    display:flex;
+    flex-direction: column;
+    align-items: center;    
     margin: 10px;
     border: 1px solid black;    
     padding: 5px;

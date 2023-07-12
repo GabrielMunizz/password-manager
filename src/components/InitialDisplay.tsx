@@ -1,10 +1,10 @@
-import { StyledDisplay } from '../style/StyledDisplay.style';
+import { StyledInitialDisplay } from '../style/StyledInitialDisplay.style';
 
 function InitialDisplay() {
   return (
-    <StyledDisplay>
+    <StyledInitialDisplay>
       <h2>Nenhuma senha cadastrada</h2>
-    </StyledDisplay>
+    </StyledInitialDisplay>
   );
 }
 
