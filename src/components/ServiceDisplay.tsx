@@ -10,13 +10,15 @@ function ServiceDisplay(props: ServiceDisplayProps) {
   // const { nomeDoServico, login, senha, url } = submitedFormInfo;
   return (
     <StyledDisplay>
+      <h1>Senhas cadastradas:</h1>
       {submitedFormInfo.map(({ nomeDoServico, login, senha, url }) => (
-        <div key={ nomeDoServico }>
-          <a href={ url }>{nomeDoServico}</a>
+        <section className={ nomeDoServico } key={ nomeDoServico }>
+          <a href={ url } target="_blank" rel="noreferrer">{nomeDoServico}</a>
           <p>{login}</p>
           <p>{senha}</p>
-        </div>
+        </section>
       ))}
+
     </StyledDisplay>
   );
 }
