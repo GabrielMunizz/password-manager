@@ -22,7 +22,6 @@ function App() {
   const [renderForm, setRenderForm] = useState(false);
   const [formInfo, setFormInfo] = useState<FormInfoType>(initialFormValues);
   const [submitedFormInfo, setSubmitedFormInfo] = useState<FormInfoType[]>([]);
-  const [renderInitialDisplay, setInitialDisplay] = useState(true);
   // Funções handle
 
   function handleRenderForm() {
@@ -41,10 +40,11 @@ function App() {
   function handleSubmit(event: FormSubmitEventType): void {
     event.preventDefault();
     setSubmitedFormInfo([...submitedFormInfo, formInfo]);
-    setInitialDisplay(false);
     setFormInfo(initialFormValues);
   }
-
+  function handleEraseService(login: string) {
+    setSubmitedFormInfo(submitedFormInfo.filter((info) => info.login !== login));
+  }
   return (
     <>
       <GlobalStyle />
@@ -58,12 +58,15 @@ function App() {
             handleSubmit={ (event: FormSubmitEventType) => handleSubmit(event) }
           />
         )}
-        {renderInitialDisplay && (
+        {submitedFormInfo.length === 0 && (
           <InitialDisplay />
         )}
         {!renderForm && (<Button handleRenderForm={ () => handleRenderForm() } />)}
         {submitedFormInfo.length > 0 && (
-          <ServiceDisplay submitedFormInfo={ submitedFormInfo } />
+          <ServiceDisplay
+            submitedFormInfo={ submitedFormInfo }
+            handleEraseService={ (login) => handleEraseService(login) }
+          />
         )}
       </StyledMain>
     </>

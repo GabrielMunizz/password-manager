@@ -1,19 +1,14 @@
-import { useState } from 'react';
 import { FormInfoType } from '../types/types';
 import { StyledDisplay } from '../style/StyledDisplay.style';
 import { StyledRedButton } from '../style/StyledButton.style';
 
 type ServiceDisplayProps = {
-  submitedFormInfo: FormInfoType[]
+  submitedFormInfo: FormInfoType[],
+  handleEraseService: (login: string) => void,
 };
 
 function ServiceDisplay(props: ServiceDisplayProps) {
-  const { submitedFormInfo } = props;
-  const [services, setServices] = useState<FormInfoType[]>(submitedFormInfo);
-
-  function handleEraseService() {
-    setServices((prevServices) => [...prevServices]);
-  }
+  const { submitedFormInfo, handleEraseService } = props;
 
   return (
     <StyledDisplay>
@@ -25,7 +20,7 @@ function ServiceDisplay(props: ServiceDisplayProps) {
           <p>{senha}</p>
           <StyledRedButton
             data-testid="remove-btn"
-            onClick={ () => handleEraseService() }
+            onClick={ () => handleEraseService(login) }
           >
             Apagar serviço
 
