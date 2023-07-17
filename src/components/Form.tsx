@@ -89,6 +89,8 @@ function Form(props: FormProps) {
             minLength={ 8 }
             required
           />
+          <br />
+          <button data-testid="show-hide-form-password">Mostrar senha</button>
           <p className={ senha.length > 8 ? classSenhaValida : classSenhaInvalida }>
             Possuir 8 ou mais caracteres
           </p>
