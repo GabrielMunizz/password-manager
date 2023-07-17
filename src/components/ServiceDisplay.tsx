@@ -1,4 +1,5 @@
-import { FormInfoType } from '../types/types';
+import { useState } from 'react';
+import { FormInfoType, TargetType } from '../types/types';
 import { StyledDisplay } from '../style/StyledDisplay.style';
 import { StyledRedButton } from '../style/StyledButton.style';
 
@@ -9,6 +10,10 @@ type ServiceDisplayProps = {
 
 function ServiceDisplay(props: ServiceDisplayProps) {
   const { submitedFormInfo, handleEraseService } = props;
+  const [isChecked, setIsChecked] = useState(false);
+  function handleShowPassword({ target }: React.ChangeEvent<HTMLInputElement>) {
+    setIsChecked(target.checked);
+  }
 
   return (
     <StyledDisplay>
@@ -17,7 +22,7 @@ function ServiceDisplay(props: ServiceDisplayProps) {
         <section className={ nomeDoServico } key={ nomeDoServico }>
           <a href={ url } target="_blank" rel="noreferrer">{nomeDoServico}</a>
           <p>{login}</p>
-          <p>{senha}</p>
+          <p>{isChecked ? '********' : senha}</p>
           <StyledRedButton
             data-testid="remove-btn"
             onClick={ () => handleEraseService(login) }
@@ -27,7 +32,19 @@ function ServiceDisplay(props: ServiceDisplayProps) {
           </StyledRedButton>
         </section>
       ))}
+      <div className="checkContainer">
+        <label htmlFor="showPassword">
+          Esconder senhas
+          <input
+            type="checkbox"
+            checked={ isChecked }
+            name="showPassword"
+            id="showPassword"
+            onChange={ handleShowPassword }
+          />
+        </label>
 
+      </div>
     </StyledDisplay>
   );
 }
