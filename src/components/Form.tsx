@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import { FormProps, FormSubmitEventType } from '../types/types';
 import { StyledButton, StyledRedButton } from '../style/StyledButton.style';
 import { StyledForm } from '../style/StyledForm.style';
@@ -39,6 +40,15 @@ function Form(props: FormProps) {
     }
   }
 
+  // Cria função para exibição do alerta ao cadastrar um novo serviço
+  function showAlert() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Serviço cadastrado com sucesso',
+      timer: 1500,
+    });
+  }
+
   // Form:
   return (
     <StyledForm
@@ -46,6 +56,7 @@ function Form(props: FormProps) {
       onSubmit={ (event: FormSubmitEventType) => {
         handleSubmit(event);
         handleHideForm();
+        showAlert();
       } }
     >
       <section>
