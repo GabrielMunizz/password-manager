@@ -6,9 +6,9 @@
   color: #f58989;
 }
 
-.checkContainer{
-  display: flex;
-  justify-content: center;
+.checkContainer {
   align-items: center;
+  display: flex;
+  justify-content: center;  
   margin-bottom: 5px;
 }

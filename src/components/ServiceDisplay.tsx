@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormInfoType, TargetType } from '../types/types';
+import { FormInfoType } from '../types/types';
 import { StyledDisplay } from '../style/StyledDisplay.style';
 import { StyledRedButton } from '../style/StyledButton.style';
 
