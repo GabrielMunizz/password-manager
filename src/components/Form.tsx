@@ -29,6 +29,16 @@ function Form(props: FormProps) {
     setValidInputs(nomeDoServicoValido && loginValido && senhaValida);
   }
 
+  // Cria função que mostra ou esconde senha digitada no input
+  const [hidePass, setHidePass] = useState(true);
+  function showPass() {
+    if (hidePass) {
+      setHidePass(false);
+    } else {
+      setHidePass(true);
+    }
+  }
+
   // Form:
   return (
     <StyledForm
@@ -79,7 +89,7 @@ function Form(props: FormProps) {
           <input
             id="senha"
             name="senha"
-            type="password"
+            type={ hidePass ? 'password' : 'text' }
             value={ formInfo.senha }
             onChange={ (event) => {
               handleChange(event);
@@ -90,7 +100,13 @@ function Form(props: FormProps) {
             required
           />
           <br />
-          <button data-testid="show-hide-form-password">Mostrar senha</button>
+          <button
+            data-testid="show-hide-form-password"
+            onClick={ () => showPass() }
+          >
+            Mostrar senha
+
+          </button>
           <p className={ senha.length > 8 ? classSenhaValida : classSenhaInvalida }>
             Possuir 8 ou mais caracteres
           </p>
